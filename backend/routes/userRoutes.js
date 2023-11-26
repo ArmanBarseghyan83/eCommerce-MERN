@@ -1,4 +1,4 @@
-import express from "express";
+import express from 'express';
 import {
   authUser,
   registerUser,
@@ -9,20 +9,20 @@ import {
   deleteUser,
   getUserById,
   updateUser,
-} from "../controllers/userController.js";
-import { protect, admin } from "../middleware/authMiddleware.js";
+} from '../controllers/userController.js';
+import { protect, admin } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.route("/").post(registerUser).get(protect, admin, getUsers);
-router.post("/logout", logoutUser);
-router.post("/auth", authUser); // since we only have post in this path, we can use this option
+router.route('/').post(registerUser).get(protect, admin, getUsers);
+router.post('/logout', logoutUser);
+router.post('/auth', authUser); // since we only have post in this path, we can use this option
 router
-  .route("/profile")
+  .route('/profile')
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile);
 router
-  .route("/:id")
+  .route('/:id')
   .delete(protect, admin, deleteUser)
   .get(protect, admin, getUserById)
   .put(protect, admin, updateUser);

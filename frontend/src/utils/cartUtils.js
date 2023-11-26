@@ -1,4 +1,5 @@
-// check this file maybe dont need addDecimals, only tofix and dont need to repeat Number
+// check this file maybe dont need addDecimals, only tofix and dont need to repeat Number,
+// check maybe dont need return here and when thid func used
 //*************************************************************** */
 export const addDecimals = (num) => {
   return (Math.round(num * 100) / 100).toFixed(2);

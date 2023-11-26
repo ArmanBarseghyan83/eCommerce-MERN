@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Row,
   Col,
@@ -8,15 +8,16 @@ import {
   Form,
   Button,
   Card,
-} from "react-bootstrap";
-import { FaTrash } from "react-icons/fa";
-import Message from "../components/Message";
-import { changeQty, removeFromCart } from "../slices/cartSlice";
+} from 'react-bootstrap';
+import { FaTrash } from 'react-icons/fa';
+import Message from '../components/Message';
+import { changeQty, removeFromCart } from '../slices/cartSlice';
 
 const CartScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // Access to the cart state
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
@@ -28,16 +29,17 @@ const CartScreen = () => {
     dispatch(removeFromCart(id));
   };
 
-  // this will take first to the login screen, and in loginScreen we will ckeck if url
-  // contains redirect will redirect there(in this case to /shipping)
+  // This will take first to the login screen, and in the loginScreen we will ckeck if the url
+  // contains redirect and if the useris logged in will redirect there(in this case to /shipping),
+  // else will redirect after login .
   const checkoutHandler = () => {
-    navigate("/login?redirect=/shipping");
+    navigate('/login?redirect=/shipping');
   };
 
   return (
     <Row>
       <Col md={8}>
-        <h1 style={{ marginBottom: "20px" }}>Shopping Cart</h1>
+        <h1 style={{ marginBottom: '20px' }}>Shopping Cart</h1>
         {cartItems.length === 0 ? (
           <Message>
             Your cart is empty <Link to="/">Go Back</Link>

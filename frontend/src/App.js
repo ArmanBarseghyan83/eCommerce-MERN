@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 
 // npm i react-bootstrap bootstrap ract-icons
 
-function App() {
+function App(props) {
   return (
     <>
       <Header />

@@ -14,7 +14,6 @@ function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // This is a logout(name whatever we want) in userApiSlice.js
   const [logoutApiCall] = useLogoutMutation();
 
   const logoutHandler = async () => {
@@ -29,7 +28,7 @@ function Header() {
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
+      <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect >
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>

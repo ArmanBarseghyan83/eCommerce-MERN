@@ -17,6 +17,7 @@ const getProductById = asyncHandler(async (req, res) => {
   if (product) {
     return res.json(product);
   } else {
+    // this will run if a valid ObjectId but no product was found
     res.status(404);
     throw new Error("Product not found");
   }

@@ -5,6 +5,7 @@ import Message from "../components/Message";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
 
 const HomeScreen = () => {
+  // When we use ApiSlice to fetch data, errors will be handled automatically.
   const { data: products, isLoading, error } = useGetProductsQuery();
 
   return (

@@ -1,6 +1,7 @@
 import { apiSlice } from "./apiSlice";
 import { USERS_URL } from "../constants";
 
+// With help of injectEndpoints() method injected in apiSlice.js. (no need to import)
 // If request is GET use builder.query, else builder.mutation
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -60,6 +61,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
     }),
   }),
 });
+
+// We need to add use(endpointname)Query.
+// We need to add use(endpointname)Mutation.
+// To call mutation in component const [login, { isLoading, error }] = useRegisterMutation(), then login(userdata), 
+// and to access to the data after mutation login(userdata).unwrap()
+// To call query in component const { data: user, isLoading, error } = useGetProductsQuery(userId),
+// and data which renamed user will be data after query.
 
 export const {
   useLoginMutation,

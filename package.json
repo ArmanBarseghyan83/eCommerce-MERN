@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "MERN app",
   "type": "module",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node backend/index.js",
-    "server": "nodemon backend/index.js",
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node backend/seeder.js",

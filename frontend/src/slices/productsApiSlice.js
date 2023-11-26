@@ -1,6 +1,7 @@
 import { PRODUCTS_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 
+// With help of injectEndpoints() method injected in apiSlice.js. (no need to import)
 export const productsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
@@ -18,6 +19,6 @@ export const productsApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-// need to add use(endpointname)Query
+
 export const { useGetProductsQuery, useGetProductDetalsQuery } =
   productsApiSlice;

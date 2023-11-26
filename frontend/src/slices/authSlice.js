@@ -25,6 +25,8 @@ const authSlice = createSlice({
   },
 });
 
+// For use in dispatch() functions
 export const { setCredentials, logout } = authSlice.actions;
 
+// For use in store.js
 export default authSlice.reducer;

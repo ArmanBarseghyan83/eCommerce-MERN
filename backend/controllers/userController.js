@@ -1,6 +1,6 @@
-import asyncHandler from "../middleware/asyncHandler.js";
-import User from "../models/userModel.js";
-import generateToken from "../utils/generateToken.js";
+import asyncHandler from '../middleware/asyncHandler.js';
+import User from '../models/userModel.js';
+import generateToken from '../utils/generateToken.js';
 
 // @desc    Auth user & ger token
 // @route   POST /api/users/login
@@ -21,7 +21,7 @@ const authUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(401);
-    throw new Error("Invalid email or password");
+    throw new Error('Invalid email or password');
   }
 });
 
@@ -35,10 +35,10 @@ const registerUser = asyncHandler(async (req, res) => {
 
   if (userExists) {
     res.status(400);
-    throw new Error("User alerady exists");
+    throw new Error('User alerady exists');
   }
 
-  // with create method we dont need user.save()
+  // with create method we don't need user.save()
   const user = await User.create({ name, email, password });
 
   if (user) {
@@ -52,7 +52,7 @@ const registerUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(400);
-    throw new Error("Invalid user data");
+    throw new Error('Invalid user data');
   }
 });
 
@@ -61,12 +61,12 @@ const registerUser = asyncHandler(async (req, res) => {
 // @access  Private
 const logoutUser = asyncHandler(async (req, res) => {
   // setting new cookie with no value to overwrite what we had and expiring (clearing cookie)
-  res.cookie("jwt", "", {
+  res.cookie('jwt', '', {
     httpOnly: true,
     expires: new Date(0),
   });
 
-  res.status(200).json({ message: "Logged out successfully" });
+  res.status(200).json({ message: 'Logged out successfully' });
 });
 
 // @desc    Get user profile
@@ -85,7 +85,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(404);
-    throw new Error("User not found");
+    throw new Error('User not found');
   }
 });
 
@@ -96,7 +96,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
-    // means if left side does not exist use right side
+    
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
 
@@ -115,7 +115,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(404);
-    throw new Error("User not found");
+    throw new Error('User not found');
   }
 });
 
@@ -123,28 +123,28 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 // @route   GET /api/users
 // @access  Privete/Admin
 const getUsers = asyncHandler(async (req, res) => {
-  res.send("get users");
+  res.send('get users');
 });
 
 // @desc    Get user by id
 // @route   GET /api/users/:id
 // @access  Privete/Admin
 const getUserById = asyncHandler(async (req, res) => {
-  res.send("get user by id");
+  res.send('get user by id');
 });
 
 // @desc    Delete user
 // @route   DELETE /api/users/:id
 // @access  Privete/Admin
 const deleteUser = asyncHandler(async (req, res) => {
-  res.send("delete user");
+  res.send('delete user');
 });
 
 // @desc    Update user
 // @route   PUT /api/users/:id
 // @access  Privete/Admin
 const updateUser = asyncHandler(async (req, res) => {
-  res.send("update user");
+  res.send('update user');
 });
 
 export {
