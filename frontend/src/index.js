@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
-import 'bootstrap/dist/css/bootstrap.min.css'; // need this after installing bootstrap or use custom.css
+//import 'bootstrap/dist/css/bootstrap.min.css'; // need this after installing bootstrap or use custom.css
 import './assets/styles/bootstrap.custom.css'; // for custom bootstrap
 import './assets/styles/index.css'; // after deleting root index.css
 import App from './App';
@@ -20,6 +20,7 @@ import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ShippingScreen from './screens/ShippingScreen';
 import PrivateRoute from './components/PrivateRoute';
+import PaymentScreen from './screens/PaymentScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
 
       <Route path="" element={<PrivateRoute />}>
         <Route path="/shipping" element={<ShippingScreen />} />
+        <Route path="/payment" element={<PaymentScreen />} />
       </Route>
     </Route>
   )
