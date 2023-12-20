@@ -8,7 +8,7 @@ const notFound = (req, res, next) => {
 };
 
 
-// Overwrite default express error handler
+// err is going to be error passed from notFound() and will be modified if necessary
 const errorHandler = (err, req, res, next) => {
   let statusCode = res.statusCode === 200 ? 500 : res.statusCode;
   let message = err.message;

@@ -5,6 +5,7 @@ dotenv.config();
 import connentDB from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 connentDB(); // Connecting to DB
@@ -24,9 +25,9 @@ app.get("/", (req, res) => {
   res.send("API is rinning...");
 });
 
-// means after this path use routes in productRoutes
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
 
 // if there is no route match it goes to the next middleware
 app.use(notFound);
