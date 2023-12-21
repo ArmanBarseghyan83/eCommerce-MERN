@@ -96,11 +96,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
-    
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
 
-    // thid way we dont hash the password if does not changed
+    // this way we dont hash the password if does not changed
     if (req.body.password) {
       user.password = req.body.password;
     }

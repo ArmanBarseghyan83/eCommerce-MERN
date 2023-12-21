@@ -29,6 +29,9 @@ app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 
+// This is from paypal docs
+app.get('/api/config/paypal', (req, res) => res.send({clientId: process.env.PAYPAL_CLIENT_ID}))
+
 // if there is no route match it goes to the next middleware
 app.use(notFound);
 app.use(errorHandler);
