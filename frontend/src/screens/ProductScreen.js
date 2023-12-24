@@ -14,7 +14,7 @@ import {
 import Rating from "../components/Rating";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { useGetProductDetalsQuery } from "../slices/productsApiSlice";
+import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
 import { addToCart } from "../slices/cartSlice";
 
 function ProductScreen() {
@@ -27,7 +27,7 @@ function ProductScreen() {
     data: product,
     isLoading,
     error,
-  } = useGetProductDetalsQuery(productId);
+  } = useGetProductDetailsQuery(productId);
 
   const addToCartHandler = () => {
     dispatch(addToCart({ ...product, qty }));
