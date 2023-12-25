@@ -8,15 +8,10 @@ const notFound = (req, res, next) => {
 };
 
 
-// err is going to be error passed from notFound() and will be modified if necessary
+// err is going to be error passed from notFound() or from other routes if any
 const errorHandler = (err, req, res, next) => {
   let statusCode = res.statusCode === 200 ? 500 : res.statusCode;
   let message = err.message;
-
-  if (err.name === "CastError" && err.kind === "ObjectId") {
-    message = `Resource not found`;
-    statusCode = 404;
-  }
 
   res.status(statusCode).json({
     message: message,
