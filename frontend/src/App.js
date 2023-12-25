@@ -5,8 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-// npm i react-bootstrap bootstrap ract-icons
-
 function App(props) {
   return (
     <>
