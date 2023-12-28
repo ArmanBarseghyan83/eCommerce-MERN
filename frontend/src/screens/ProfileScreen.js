@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Table, Form, Button, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,22 +12,17 @@ import { useGetMyOrdersQuery } from '../slices/ordersApiSlice';
 import { setCredentials } from '../slices/authSlice';
 
 const ProfileScreen = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const [name, setName] = useState(userInfo.name);
+  const [email, setEmail] = useState(userInfo.email);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
-  const { userInfo } = useSelector((state) => state.auth);
 
   const { data: orders, isLoading, error } = useGetMyOrdersQuery();
 
   const [updateProfile, { isLoading: loadingUpdateProfile }] =
     useProfileMutation();
-
-  useEffect(() => {
-    setName(userInfo.name);
-    setEmail(userInfo.email);
-  }, [userInfo.email, userInfo.name]);
 
   const dispatch = useDispatch();
   const submitHandler = async (e) => {
