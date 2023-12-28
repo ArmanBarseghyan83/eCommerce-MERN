@@ -38,7 +38,7 @@ const ProductListScreen = () => {
     useCreateProductMutation();
 
   const createProductHandler = async () => {
-    if (window.confirm('Are you sure you want to create a new product?')) {
+    if (window.confirm('This will create a sample product and you can edit after.')) {
       try {
         await createProduct();
         refetch();

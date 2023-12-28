@@ -4,10 +4,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 dotenv.config();
 import connentDB from './config/db.js';
-import productRoutes from './routes/productRoutes.js';
-import userRoutes from './routes/userRoutes.js';
-import orderRoutes from './routes/orderRoutes.js';
-import uploadRoutes from './routes/uploadRoutes.js';
+import routes from './routes/index.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 connentDB(); // Connecting to DB
@@ -23,10 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 // Cookie parser middleware, this will allow to access req.cookies.jwt
 app.use(cookieParser());
 
-app.use('/api/products', productRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/orders', orderRoutes);
-app.use('/api/upload', uploadRoutes);
+app.use(routes);
 
 // This is from paypal docs
 app.get('/api/config/paypal', (req, res) =>
