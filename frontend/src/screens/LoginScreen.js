@@ -28,6 +28,7 @@ const LoginScreen = () => {
 
   // If userInfo means if user is logged in dont open login form and navigate to redirect
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (userInfo) {
       navigate(redirect);
     }

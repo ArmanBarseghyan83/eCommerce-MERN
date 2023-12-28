@@ -30,7 +30,7 @@ function Header() {
   };
 
   return (
-    <header>
+    <header className='nav-header'>
       <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
         <Container>
           <LinkContainer to="/">

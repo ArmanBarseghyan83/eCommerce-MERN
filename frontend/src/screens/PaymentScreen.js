@@ -12,6 +12,7 @@ const PaymentScreen = () => {
   const { shippingAddress } = cart;
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (!shippingAddress.address) {
       navigate('/shipping');
     }

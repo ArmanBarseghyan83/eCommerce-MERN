@@ -59,6 +59,7 @@ const ProductEditScreen = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (product) {
       setName(product.name);
       setPrice(product.price);

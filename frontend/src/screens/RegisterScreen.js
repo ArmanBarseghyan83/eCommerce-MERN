@@ -27,6 +27,7 @@ const RegisterScreen = () => {
   const redirect = sp.get('redirect') || '/';
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (userInfo) {
       navigate(redirect);
     }

@@ -41,6 +41,7 @@ const OrderScreen = () => {
   } = useGetPaypalClientIdQuery();
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (!errorPayPal && !loadingPayPal && paypal.clientId) {
       // From @paypal/react-paypal-js docs
       const loadPaypalScript = async () => {

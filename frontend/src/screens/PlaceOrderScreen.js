@@ -17,6 +17,7 @@ const PlaceOrderScreen = () => {
   const [createOrder, { isLoading, error }] = useCreateOrderMutation();
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (!cart.shippingAddress.address) {
       navigate('/shipping');
     } else if (!cart.paymentMethod) {

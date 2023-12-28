@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useGetProductsQuery } from '../slices/productsApiSlice';
@@ -15,6 +16,10 @@ const HomeScreen = () => {
     pageNumber,
   });
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       {!keyword ? (
@@ -24,9 +29,7 @@ const HomeScreen = () => {
           Go Back
         </Link>
       )}
-      {isLoading ? (
-        null
-      ) : error ? (
+      {isLoading ? null : error ? (
         <Message variant="danger">
           {error?.data?.message || error.error}
         </Message>
