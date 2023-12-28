@@ -138,7 +138,9 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
 // @route   GET /api/orders
 // @access  Private/Admin
 const getOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({}).populate('user', 'id name'); // only id and name
+  const orders = await Order.find({})
+  .populate('user', 'id name') // only id and name
+  .sort({ createdAt: - 1 })
   res.json(orders);
 });
 
