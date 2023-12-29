@@ -13,6 +13,7 @@ import {
 import { FaTrash } from 'react-icons/fa';
 import Message from '../components/Message';
 import { changeQty, removeFromCart } from '../slices/cartSlice';
+import Meta from '../components/Meta';
 
 const CartScreen = () => {
   const navigate = useNavigate();
@@ -43,6 +44,7 @@ const CartScreen = () => {
   
   return (
     <Row>
+      <Meta title="Cart"/>
       <Col md={8}>
         <h1 style={{ marginBottom: '20px' }}>Shopping Cart</h1>
         {cartItems.length === 0 ? (
