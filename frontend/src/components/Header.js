@@ -17,13 +17,6 @@ function Header() {
 
   const [searchBox, setSearchBox] = useState(false);
 
-  let userName = userInfo?.name;
-  if (userName?.length > 9 && userInfo?.isAdmin) {
-    userName = `${userName?.substring(0, 7)}...`;
-  } else {
-    userName = `${userName?.substring(0, 17)}...`;
-  }
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

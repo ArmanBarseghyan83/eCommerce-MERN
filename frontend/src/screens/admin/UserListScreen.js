@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button } from 'react-bootstrap';
-import { FaTrash, FaEdit, FaCheck, FaTimes } from 'react-icons/fa';
+import { FaTrash, FaCheck, FaTimes } from 'react-icons/fa';
+import { RiEdit2Fill } from 'react-icons/ri';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import {
@@ -27,8 +28,8 @@ const UserListScreen = () => {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
@@ -36,14 +37,13 @@ const UserListScreen = () => {
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <Message variant='danger'>
+        <Message variant="danger">
           {error?.data?.message || error.error}
         </Message>
       ) : (
-        <Table striped bordered hover responsive className='table-sm'>
+        <Table striped bordered hover responsive className="table-sm">
           <thead>
             <tr>
-              <th>ID</th>
               <th>NAME</th>
               <th>EMAIL</th>
               <th>ADMIN</th>
@@ -53,7 +53,6 @@ const UserListScreen = () => {
           <tbody>
             {users.map((user) => (
               <tr key={user._id}>
-                <td>{user._id}</td>
                 <td>{user.name}</td>
                 <td>
                   <a href={`mailto:${user.email}`}>{user.email}</a>
@@ -70,19 +69,16 @@ const UserListScreen = () => {
                     <>
                       <LinkContainer
                         to={`/admin/user/${user._id}/edit`}
-                        style={{ marginRight: '10px' }}
+                        style={{ color: 'green', cursor: 'pointer' }}
                       >
-                        <Button variant='light' className='btn-sm'>
-                          <FaEdit />
-                        </Button>
+                        <RiEdit2Fill className="m-2" />
                       </LinkContainer>
-                      <Button
-                        variant='danger'
-                        className='btn-sm'
+
+                      <FaTrash
                         onClick={() => deleteHandler(user._id)}
-                      >
-                        <FaTrash style={{ color: 'white' }} />
-                      </Button>
+                        className="m-2"
+                        style={{ color: 'red', cursor: 'pointer' }}
+                      />
                     </>
                   )}
                 </td>
