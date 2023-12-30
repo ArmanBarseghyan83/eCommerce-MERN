@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
+import { IoReturnUpBackOutline } from "react-icons/io5";
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import FormContainer from '../../components/FormContainer';
@@ -85,8 +86,8 @@ const ProductEditScreen = () => {
 
   return (
     <>
-      <Link to="/admin/productlist" className="btn btn-light my-3">
-        Go Back
+      <Link className="h1" to="/admin/productlist">
+        {<IoReturnUpBackOutline />}
       </Link>
       <FormContainer>
         <h1>Edit Product</h1>

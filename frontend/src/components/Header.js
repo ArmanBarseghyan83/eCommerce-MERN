@@ -84,8 +84,7 @@ function Header() {
                   onClick={setSearchBox.bind(null, false)}
                 >
                   <Nav.Link>
-                    <FaUser />
-                    Sign In
+                    Login
                   </Nav.Link>
                 </LinkContainer>
               )}

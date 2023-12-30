@@ -3,6 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useGetProductsQuery } from '../slices/productsApiSlice';
 import { Link } from 'react-router-dom';
+import { IoReturnUpBackOutline } from 'react-icons/io5';
 import Product from '../components/Product';
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
@@ -23,12 +24,12 @@ const HomeScreen = () => {
 
   return (
     <>
-    <Meta title="Welcome To eCommerce"/>
+      <Meta title="Welcome To eCommerce" />
       {!keyword ? (
         <ProductCarousel />
       ) : (
-        <Link to="/" className="btn btn-light mb-4">
-          Go Back
+        <Link className="h1" to="/">
+          {<IoReturnUpBackOutline />}
         </Link>
       )}
       {isLoading ? null : error ? (

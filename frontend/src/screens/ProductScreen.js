@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { IoReturnUpBackOutline } from 'react-icons/io5';
 import {
   Row,
   Col,
@@ -65,13 +66,13 @@ function ProductScreen() {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
-      <Link className="btn btn-light my-3" to="/">
-        Go Back
+      <Link className="h1" to="/">
+        {<IoReturnUpBackOutline />}
       </Link>
       {isLoading ? (
         <Loader />
@@ -81,29 +82,29 @@ function ProductScreen() {
         </Message>
       ) : (
         <>
-        <Meta title={product.name}/>
+          <Meta title={product.name} />
           <Row>
-            <Col md={5}>
+            <Col md={6}>
               <Image src={product.image} alt={product.name} fluid />
             </Col>
-            <Col md={4}>
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <h3>{product.name}</h3>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Rating
-                    value={product.rating}
-                    text={`${product.numReviews} reviews`}
-                  />
-                </ListGroup.Item>
-                <ListGroup.Item>Price: {product.price}</ListGroup.Item>
-                <ListGroup.Item>
-                  Descriprion: {product.description}
-                </ListGroup.Item>
-              </ListGroup>
-            </Col>
-            <Col md={3}>
+            <Col md={6}>
+              <Card>
+                <ListGroup variant="flush">
+                  <ListGroup.Item>
+                    <h3>{product.name}</h3>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <Rating
+                      value={product.rating}
+                      text={`${product.numReviews} reviews`}
+                    />
+                  </ListGroup.Item>
+                  <ListGroup.Item>Price: {product.price}</ListGroup.Item>
+                  <ListGroup.Item>
+                    Descriprion: {product.description}
+                  </ListGroup.Item>
+                </ListGroup>
+              </Card>
               <Card>
                 <ListGroup variant="flush">
                   <ListGroup.Item>
@@ -162,11 +163,11 @@ function ProductScreen() {
               </Card>
             </Col>
           </Row>
-          <Row className='review'>
-            <Col md={6}>
+          <Row className="review">
+            <Col md={12} lg={6}>
               <h2>Reviews</h2>
               {product.reviews.length === 0 && <Message>No Reviews</Message>}
-              <ListGroup variant='flush'>
+              <ListGroup variant="flush">
                 {product.reviews.map((review) => (
                   <ListGroup.Item key={review._id}>
                     <strong>{review.name}</strong>
@@ -182,27 +183,28 @@ function ProductScreen() {
 
                   {userInfo ? (
                     <Form onSubmit={submitHandler}>
-                      <Form.Group className='my-2' controlId='rating'>
+                      <Form.Group className="my-2" controlId="rating">
                         <Form.Label>Rating</Form.Label>
                         <Form.Control
-                          as='select'
+                          as="select"
                           required
                           value={rating}
                           onChange={(e) => setRating(e.target.value)}
+                          className='w-50'
                         >
-                          <option value=''>Select...</option>
-                          <option value='1'>1 - Poor</option>
-                          <option value='2'>2 - Fair</option>
-                          <option value='3'>3 - Good</option>
-                          <option value='4'>4 - Very Good</option>
-                          <option value='5'>5 - Excellent</option>
+                          <option value="">Select...</option>
+                          <option value="1">1 - Poor</option>
+                          <option value="2">2 - Fair</option>
+                          <option value="3">3 - Good</option>
+                          <option value="4">4 - Very Good</option>
+                          <option value="5">5 - Excellent</option>
                         </Form.Control>
                       </Form.Group>
-                      <Form.Group className='my-2' controlId='comment'>
+                      <Form.Group className="my-2" controlId="comment">
                         <Form.Label>Comment</Form.Label>
                         <Form.Control
-                          as='textarea'
-                          row='3'
+                          as="textarea"
+                          row="3"
                           required
                           value={comment}
                           onChange={(e) => setComment(e.target.value)}
@@ -210,15 +212,15 @@ function ProductScreen() {
                       </Form.Group>
                       <Button
                         disabled={loadingProductReview}
-                        type='submit'
-                        variant='primary'
+                        type="submit"
+                        variant="primary"
                       >
                         Submit
                       </Button>
                     </Form>
                   ) : (
                     <Message>
-                      Please <Link to='/login'>sign in</Link> to write a review
+                      Please <Link to="/login">sign in</Link> to write a review
                     </Message>
                   )}
                 </ListGroup.Item>

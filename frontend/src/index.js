@@ -10,8 +10,7 @@ import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { HelmetProvider } from 'react-helmet-async'; // for metadata in the pages (ex title)
 import { Provider } from 'react-redux';
 import store from './store';
-//import 'bootstrap/dist/css/bootstrap.min.css'; // need this after installing bootstrap or use custom.css
-import './assets/styles/bootstrap.custom.css'; // for custom bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 import './assets/styles/index.css'; // after deleting root index.css
 import App from './App';
 import reportWebVitals from './reportWebVitals';
