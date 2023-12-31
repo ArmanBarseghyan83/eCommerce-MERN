@@ -2,12 +2,9 @@ import { useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useGetProductsQuery } from '../slices/productsApiSlice';
-import { Link } from 'react-router-dom';
-import { IoReturnUpBackOutline } from 'react-icons/io5';
 import Product from '../components/Product';
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
-import ProductCarousel from '../components/ProductCarousel';
 import Meta from '../components/Meta';
 
 const HomeScreen = () => {
@@ -25,13 +22,6 @@ const HomeScreen = () => {
   return (
     <>
       <Meta title="Welcome To eCommerce" />
-      {!keyword ? (
-        <ProductCarousel />
-      ) : (
-        <Link className="h1" to="/">
-          {<IoReturnUpBackOutline />}
-        </Link>
-      )}
       {isLoading ? null : error ? (
         <Message variant="danger">
           {error?.data?.message || error.error}

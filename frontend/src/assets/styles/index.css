@@ -71,13 +71,14 @@ a:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: #506574;
+  opacity: .4;
 }
 
 .nav-header {
   position: sticky;
   top: 0;
-  width: 100%;
+  width: 100vw;
   z-index: 100;
   background-color: #506574;
   font-size: 1.3rem;
