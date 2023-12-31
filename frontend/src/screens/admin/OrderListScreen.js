@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Table, Button } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { FaTimes, FaCheck } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import Message from '../../components/Message';
