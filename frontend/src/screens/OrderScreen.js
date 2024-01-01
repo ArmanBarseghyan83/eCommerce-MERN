@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
+import { IoReturnUpBackOutline } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Message from '../components/Message';
@@ -101,12 +102,17 @@ const OrderScreen = () => {
     refetch();
   };
 
+  const adminPath = useLocation().pathname.split('/')[1] === 'admin';
+
   return isLoading ? (
     <Loader />
   ) : error ? (
     <Message variant="danger">{error?.data?.message || error}</Message>
   ) : (
     <>
+      <Link className="h1" to={adminPath ? '/admin/orderlist' : '/profile'}>
+        {<IoReturnUpBackOutline />}
+      </Link>
       <h2>Order {order._id}</h2>
       <Row>
         <Col md={7}>

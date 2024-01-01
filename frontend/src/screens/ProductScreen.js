@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { IoReturnUpBackOutline } from 'react-icons/io5';
 import {
   Row,
   Col,
@@ -70,6 +71,9 @@ function ProductScreen() {
 
   return (
     <>
+      <Link className="h1" to="/">
+        {<IoReturnUpBackOutline />}
+      </Link>
       {isLoading ? (
         <Loader />
       ) : error ? (
@@ -186,7 +190,7 @@ function ProductScreen() {
                           required
                           value={rating}
                           onChange={(e) => setRating(e.target.value)}
-                          className='w-50'
+                          className="w-50"
                         >
                           <option value="">Select...</option>
                           <option value="1">1 - Poor</option>

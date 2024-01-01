@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Table, Button } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { FaTrash, FaCheck, FaTimes } from 'react-icons/fa';
+import { IoReturnUpBackOutline } from 'react-icons/io5';
 import { RiEdit2Fill } from 'react-icons/ri';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
@@ -33,6 +35,9 @@ const UserListScreen = () => {
 
   return (
     <>
+      <Link className="h1" to="/">
+        {<IoReturnUpBackOutline />}
+      </Link>
       <h1>Users</h1>
       {isLoading ? (
         <Loader />

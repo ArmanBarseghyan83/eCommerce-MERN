@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useGetProductsQuery } from '../slices/productsApiSlice';
+import { IoReturnUpBackOutline } from 'react-icons/io5';
 import Product from '../components/Product';
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
@@ -21,6 +22,11 @@ const HomeScreen = () => {
 
   return (
     <>
+      {keyword && (
+        <Link className="h1" to="/">
+          {<IoReturnUpBackOutline />}
+        </Link>
+      )}
       <Meta title="Welcome To eCommerce" />
       {isLoading ? null : error ? (
         <Message variant="danger">

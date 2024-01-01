@@ -1,27 +1,18 @@
-import { Container } from "react-bootstrap";
-import { Outlet, Link, useLocation } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import { IoReturnUpBackOutline } from 'react-icons/io5';
-import "react-toastify/dist/ReactToastify.css";
-import Header from "./components/Header";
+import { Container } from 'react-bootstrap';
+import { Outlet, useLocation } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Header from './components/Header';
 import ProductCarousel from './components/ProductCarousel';
-import Footer from "./components/Footer";
+import Footer from './components/Footer';
 
 function App(props) {
+  const homePath = useLocation().pathname === '/';
 
-  const homePath = useLocation().pathname === '/'
-
-  console.log(homePath)
   return (
     <>
       <Header />
-      {homePath ? (
-        <ProductCarousel />
-      ) : (
-        <Link className="h1 m-sm-5" to="/">
-          {<IoReturnUpBackOutline />}
-        </Link>
-      )}
+      {homePath && <ProductCarousel />}
       <main className="py-3">
         <Container>
           <Outlet />

@@ -3,7 +3,8 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { FaPlus, FaTrash } from 'react-icons/fa';
 import { RiEdit2Fill } from 'react-icons/ri';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import { IoReturnUpBackOutline } from 'react-icons/io5';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import Paginate from '../../components/Paginate';
@@ -60,6 +61,9 @@ const ProductListScreen = () => {
 
   return (
     <>
+      <Link className="h1" to="/">
+        {<IoReturnUpBackOutline />}
+      </Link>
       <Row className="align-items-center">
         <Col>
           <h1>Products</h1>
