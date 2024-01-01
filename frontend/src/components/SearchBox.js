@@ -31,7 +31,7 @@ const SearchBox = ({onSetSearchBox}) => {
         placeholder='Search Products...'
         className='mr-sm-2 ml-sm-5 py-1'
       ></Form.Control>
-      <Button type='submit' variant='outline-light' className='py-0 mx-2'>
+      <Button type='submit' variant='outline-light' className='py-0 mx-2 border'>
         Search
       </Button>
     </Form>

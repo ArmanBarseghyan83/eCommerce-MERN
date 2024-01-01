@@ -81,6 +81,7 @@ a:hover {
   width: 100vw;
   z-index: 100;
   background-color: #506574;
+  background: linear-gradient(to right, #8ca6b3, #2e4453);
   font-size: 1.3rem;
 }
 
@@ -116,4 +117,17 @@ a:hover {
 
 .badge {
   background-color: #3b4953 !important;
+}
+
+@media screen and (max-width: 700px) {
+  .carousel-right div {
+    font-size: 1.5rem;
+  }
+}
+
+
+@media screen and (max-width: 500px) {
+  .carousel-right div {
+    font-size: 1.1rem;
+  }
 }
