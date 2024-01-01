@@ -13,7 +13,7 @@ const ProductCarousel = () => {
   ) : error ? (
     <Message variant="danger">{error?.data?.message || error.error}</Message>
   ) : (
-    <Container fluid>
+    <Container className='position-relative' fluid>
       <Row
         style={{
           background: 'linear-gradient(to right, #8ca6b3, #2e4453)',
@@ -44,7 +44,7 @@ const ProductCarousel = () => {
           <Image
             src={homeImg}
             className=" position-absolute w-50 "
-            style={{ right: '-0', top: '6rem', width: '35rem' }}
+            style={{ right: '-0', top: '0.5rem', width: '35rem' }}
           />
         </Col>
       </Row>
