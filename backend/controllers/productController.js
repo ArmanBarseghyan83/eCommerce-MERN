@@ -32,6 +32,7 @@ const getProducts = asyncHandler(async (req, res) => {
 const getProductById = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {
+    product.reviews = product.reviews.reverse()
     return res.json(product);
   } else {
     // this will run if a valid ObjectId but no product was found

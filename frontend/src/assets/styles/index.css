@@ -54,7 +54,8 @@ a:hover {
   margin-top: 30px;
 }
 
-.review h2 {
+.review h2,
+.review h3 {
   font-size: 24px;
   background: #f4f4f4;
   padding: 10px;
@@ -63,6 +64,17 @@ a:hover {
 
 .review button {
   margin-top: 10px;
+}
+
+.review section {
+  max-height: 30rem;
+  overflow-y: scroll;
+  background-color: #fff
+}
+
+.table,
+.list-group-item {
+  color:#506574;
 }
 
 .carousel-caption {
@@ -117,6 +129,16 @@ a:hover {
 
 .badge {
   background-color: #3b4953 !important;
+}
+
+::-webkit-scrollbar {
+  width:10px;
+}
+::-webkit-scrollbar-track {
+  background: #dfe2e6;
+}
+::-webkit-scrollbar-thumb {
+  background: #aeb7be;
 }
 
 @media screen and (max-width: 700px) {
