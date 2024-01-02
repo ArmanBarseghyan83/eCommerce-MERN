@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 dotenv.config();
 import connentDB from './config/db.js';
 import routes from './routes/index.js'
-import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+import {  errorHandler } from './middleware/errorMiddleware.js';
 
 connentDB(); // Connecting to DB
 

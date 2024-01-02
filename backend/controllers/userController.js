@@ -73,7 +73,7 @@ const logoutUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/profile
 // @access  Private
 const getUserProfile = asyncHandler(async (req, res) => {
-  // we qreated user in req object when loggdin
+  // pushed the user to the req object when calling protect middlware
   const user = await User.findById(req.user._id);
 
   if (user) {
