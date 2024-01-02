@@ -87,6 +87,13 @@ a:hover {
   opacity: .4;
 }
 
+.carousel-right img {
+   right: 0;
+   top: 1rem;
+  
+}
+
+
 .nav-header {
   position: sticky;
   top: 0;
@@ -145,6 +152,9 @@ a:hover {
   .carousel-right div {
     font-size: 1.5rem;
   }
+  .carousel-right img {
+    top: 3rem;
+ }
 }
 
 

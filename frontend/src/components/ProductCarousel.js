@@ -3,7 +3,7 @@ import { Carousel, Image, Col, Row, Container } from 'react-bootstrap';
 import Message from './Message';
 import Loader from './Loader';
 import { useGetTopProductsQuery } from '../slices/productsApiSlice';
-import homeImg from '../assets/home.png';
+import homeImg from '../assets/home2.png';
 
 const ProductCarousel = () => {
   const { data: products, isLoading, error } = useGetTopProductsQuery();
@@ -20,17 +20,17 @@ const ProductCarousel = () => {
         }}
         className="py-2"
       >
-        <Col lg={4} xs={5}>
+        <Col lg={4} xs={6}>
           <Carousel pause="hover">
             {products.map((product) => (
               <Carousel.Item key={product._id}>
                 <Link to={`/product/${product._id}`}>
                   <Image src={product.image} alt={product.name} fluid />
                   <Carousel.Caption className="carousel-caption pt-0">
-                    <h3 className="text-white text-right">
+                    <h4>
                       <span className="d-none d-md-block">{product.name}</span>{' '}
                       ${product.price}
-                    </h3>
+                    </h4>
                   </Carousel.Caption>
                 </Link>
               </Carousel.Item>
@@ -38,13 +38,12 @@ const ProductCarousel = () => {
           </Carousel>
         </Col>
 
-        <Col className="carousel-right h1" style={{ color: '#ebeff1' }}>
+        <Col className="carousel-right h1 " style={{ color: '#ebeff1' }}>
             <div>Sale 20% OFF</div>
             <div>New Arrivals</div>
           <Image
             src={homeImg}
             className=" position-absolute w-50 "
-            style={{ right: '-0', top: '0.5rem', width: '35rem' }}
           />
         </Col>
       </Row>
