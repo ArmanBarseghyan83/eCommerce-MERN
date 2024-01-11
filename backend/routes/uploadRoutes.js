@@ -1,39 +1,10 @@
-import path from 'path';
 import express from 'express';
 import multer from 'multer';
+import { storage } from './../claudinary/index.js';
 
 const router = express.Router();
 
-// Save the uploaded image in the uploads folder
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, 'uploads/');
-  },
-  filename(req, file, cb) {
-    cb(
-      null,
-      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
-    );
-  },
-});
-
-// Check if the uploaded file is only image
-function fileFilter(req, file, cb) {
-  const filetypes = /jpe?g|png|webp/;
-  const mimetypes = /image\/jpe?g|image\/png|image\/webp/;
-
-  // Check if matches with regex
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-  const mimetype = mimetypes.test(file.mimetype);
-
-  if (extname && mimetype) {
-    cb(null, true);
-  } else {
-    cb(new Error('Images only!'), false);
-  }
-}
-
-const upload = multer({ storage, fileFilter });
+const upload = multer({ storage })
 const uploadSingleImage = upload.single('image');
 
 router.post('/', (req, res) => {
@@ -44,7 +15,7 @@ router.post('/', (req, res) => {
 
     res.status(200).send({
       message: 'Image uploaded successfully',
-      image: `/${req.file.path}`,
+      image: `${req.file.path}`,
     });
   });
 });
