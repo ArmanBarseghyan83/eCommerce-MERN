@@ -13,6 +13,7 @@ const PlaceOrderScreen = () => {
   const navigate = useNavigate();
 
   const cart = useSelector((state) => state.cart);
+  console.log(cart.cartItems)
 
   const [createOrder, { isLoading, error }] = useCreateOrderMutation();
 

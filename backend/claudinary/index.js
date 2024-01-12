@@ -9,10 +9,11 @@ cloudinary.config({
 
 //defining cloudinary storage
 export const storage = new CloudinaryStorage({
-  cloudinary, 
+  cloudinary,
   params: {
     folder: 'eCommerce',
     allowedFormats: ['jpeg', 'png', 'jpg'],
   },
 });
 
+export { cloudinary };

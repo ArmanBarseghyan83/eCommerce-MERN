@@ -25,6 +25,11 @@ const reviewSchema = mongoose.Schema(
   }
 );
 
+const imageSchema = new mongoose.Schema({
+  url: String,
+  filename: String,
+});
+
 const productSchema = new mongoose.Schema(
   {
     user: {
@@ -36,10 +41,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    image: {
-      type: String,
-      required: true,
-    },
+    images: [imageSchema],
     brand: {
       type: String,
       required: true,

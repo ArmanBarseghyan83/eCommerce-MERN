@@ -45,7 +45,16 @@ function ProductScreen() {
     useCreateReviewMutation();
 
   const addToCartHandler = () => {
-    dispatch(addToCart({ ...product, qty }));
+    dispatch(
+      addToCart({
+        name: product.name,
+        image: product.images[0].url,
+        price: product.price,
+        countInStock: product.countInStock,
+        _id: product._id,
+        qty,
+      })
+    );
     navigate('/cart');
   };
 
@@ -85,7 +94,7 @@ function ProductScreen() {
           <Meta title={product.name} />
           <Row>
             <Col md={6}>
-              <Image src={product.image} alt={product.name} fluid />
+              <Image src={product.images[0].url} alt={product.name} fluid />
             </Col>
             <Col md={6}>
               <Card>
