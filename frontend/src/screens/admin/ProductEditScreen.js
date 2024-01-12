@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
-import { IoReturnUpBackOutline } from "react-icons/io5";
+import { IoReturnUpBackOutline } from 'react-icons/io5';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import FormContainer from '../../components/FormContainer';
@@ -22,6 +22,7 @@ const ProductEditScreen = () => {
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState('');
+  const [file, setFile] = useState(null);
 
   const {
     data: product,
@@ -40,17 +41,26 @@ const ProductEditScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+
+    let uploadResult = ''
+
     try {
+      if (file) {
+        const formData = new FormData();
+        formData.append('image', file);
+        uploadResult = await uploadProductImage(formData).unwrap();
+      }
       await updateProduct({
         productId,
         name,
         price,
-        image,
+        image: uploadResult?.image || image, 
         brand,
         category,
         description,
         countInStock,
       });
+
       toast.success('Product updated');
       refetch();
       navigate('/admin/productlist');
@@ -60,7 +70,7 @@ const ProductEditScreen = () => {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
     if (product) {
       setName(product.name);
       setPrice(product.price);
@@ -71,18 +81,6 @@ const ProductEditScreen = () => {
       setDescription(product.description);
     }
   }, [product]);
-
-  const uploadFileHandler = async (e) => {
-    const formData = new FormData();
-    formData.append('image', e.target.files[0]);
-    try {
-      const res = await uploadProductImage(formData).unwrap();
-      toast.success(res.message);
-      setImage(res.image);
-    } catch (err) {
-      toast.error(err?.data?.message || err.error);
-    }
-  };
 
   return (
     <>
@@ -128,7 +126,7 @@ const ProductEditScreen = () => {
               ></Form.Control>
               <Form.Control
                 label="Choose File"
-                onChange={uploadFileHandler}
+                onChange={(e) => setFile(e.target.files[0])}
                 type="file"
               ></Form.Control>
               {loadingUpload && <Loader />}
