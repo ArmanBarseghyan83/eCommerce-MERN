@@ -98,6 +98,12 @@ const UserEditScreen = () => {
             <Button type='submit' variant='primary'>
               Update
             </Button>
+            <Link
+              to="/admin/userlist"
+              className="btn bg-white mx-3 border hover"
+            >
+              Cancel
+            </Link>
           </Form>
         )}
       </FormContainer>

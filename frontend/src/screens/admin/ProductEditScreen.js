@@ -42,8 +42,8 @@ const ProductEditScreen = () => {
   const handleCheckboxChange = (e) => {
     const { value, checked } = e.target;
     if (checked) {
-      setDeleteImages(prev => [...prev, value]);
-    } 
+      setDeleteImages((prev) => [...prev, value]);
+    }
   };
 
   const submitHandler = async (e) => {
@@ -110,6 +110,7 @@ const ProductEditScreen = () => {
             <Form.Group controlId="name">
               <Form.Label>Name</Form.Label>
               <Form.Control
+                className="mb-2"
                 type="text"
                 placeholder="Enter name"
                 value={name}
@@ -120,6 +121,7 @@ const ProductEditScreen = () => {
             <Form.Group controlId="price">
               <Form.Label>Price</Form.Label>
               <Form.Control
+                className="mb-2"
                 type="number"
                 placeholder="Enter price"
                 value={price}
@@ -130,6 +132,7 @@ const ProductEditScreen = () => {
             <Form.Group controlId="brand">
               <Form.Label>Brand</Form.Label>
               <Form.Control
+                className="mb-2"
                 type="text"
                 placeholder="Enter brand"
                 value={brand}
@@ -140,6 +143,7 @@ const ProductEditScreen = () => {
             <Form.Group controlId="countInStock">
               <Form.Label>Count In Stock</Form.Label>
               <Form.Control
+                className="mb-2"
                 type="number"
                 placeholder="Enter countInStock"
                 value={countInStock}
@@ -150,6 +154,7 @@ const ProductEditScreen = () => {
             <Form.Group controlId="category">
               <Form.Label>Category</Form.Label>
               <Form.Control
+                className="mb-2"
                 type="text"
                 placeholder="Enter category"
                 value={category}
@@ -160,6 +165,7 @@ const ProductEditScreen = () => {
             <Form.Group controlId="description">
               <Form.Label>Description</Form.Label>
               <Form.Control
+                className="mb-2"
                 type="text"
                 placeholder="Enter description"
                 value={description}
@@ -170,6 +176,7 @@ const ProductEditScreen = () => {
             <Form.Group controlId="image">
               <Form.Label>Add Image</Form.Label>
               <Form.Control
+                className="mb-2"
                 label="Choose File"
                 onChange={(e) => setFiles(e.target.files)}
                 type="file"
@@ -177,24 +184,29 @@ const ProductEditScreen = () => {
               ></Form.Control>
               {loadingUpload && <Loader />}
             </Form.Group>
-            <div>Select images to delete</div>
-            <Row >
-              {product.images.map((image, i) => (
-                <Col key={image._id} xs={3}>
-                  <div>
-                    <input
-                      id={i}
-                      type="checkbox"
-                      value={image.filename}
-                      onChange={handleCheckboxChange}
-                    />
-                    <label htmlFor={i}>
-                      <Image src={image.url} className="img-thumbnail" />
-                    </label>
-                  </div>
-                </Col>
-              ))}
-            </Row>
+            {(product.images.length > 1) && (
+              <>
+                <div className="mb-2">Select images to delete</div>
+                <Row>
+                  {product.images.map((image, i) => (
+                    <Col key={image._id} xs={3}>
+                      <div>
+                        <input
+                          id={i}
+                          type="checkbox"
+                          value={image.filename}
+                          onChange={handleCheckboxChange}
+                          className="position-absolute"
+                        />
+                        <label htmlFor={i}>
+                          <Image src={image.url} className="img-thumbnail" />
+                        </label>
+                      </div>
+                    </Col>
+                  ))}
+                </Row>
+              </>
+            )}
 
             <Button
               type="submit"
@@ -203,6 +215,12 @@ const ProductEditScreen = () => {
             >
               Update
             </Button>
+            <Link
+              to="/admin/productlist"
+              className="btn bg-white mt-3 mx-3 border hover"
+            >
+              Cancel
+            </Link>
           </Form>
         )}
       </FormContainer>

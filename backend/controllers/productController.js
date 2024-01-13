@@ -97,6 +97,15 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 
   if (deleteImages.length) {
+
+    if (deleteImages.length === product.images.length) {
+      await product.updateOne({
+        $set: {
+          images: { filename: 'image_sample', url: '/images/sample.jpg' },
+        },
+      });
+    }
+    
     for (let filename of deleteImages) {
       await cloudinary.uploader.destroy(filename);
     }
@@ -104,6 +113,8 @@ const updateProduct = asyncHandler(async (req, res) => {
     await product.updateOne({
       $pull: { images: { filename: { $in: deleteImages } } },
     });
+
+    
   }
 
   if (product) {
