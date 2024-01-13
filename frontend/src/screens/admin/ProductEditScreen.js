@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col, Image } from 'react-bootstrap';
 import { IoReturnUpBackOutline } from 'react-icons/io5';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
@@ -22,6 +22,7 @@ const ProductEditScreen = () => {
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState('');
   const [files, setFiles] = useState(null);
+  const [deleteImages, setDeleteImages] = useState([]);
 
   const {
     data: product,
@@ -37,6 +38,13 @@ const ProductEditScreen = () => {
     useUploadProductImageMutation();
 
   const navigate = useNavigate();
+
+  const handleCheckboxChange = (e) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setDeleteImages(prev => [...prev, value]);
+    } 
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -58,6 +66,7 @@ const ProductEditScreen = () => {
         name,
         price,
         images: uploadResult?.images || '',
+        deleteImages,
         brand,
         category,
         description,
@@ -118,17 +127,6 @@ const ProductEditScreen = () => {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId="image">
-              <Form.Label>Image</Form.Label>
-              <Form.Control
-                label="Choose File"
-                onChange={(e) => setFiles(e.target.files)}
-                type="file"
-                multiple
-              ></Form.Control>
-              {loadingUpload && <Loader />}
-            </Form.Group>
-
             <Form.Group controlId="brand">
               <Form.Label>Brand</Form.Label>
               <Form.Control
@@ -168,6 +166,35 @@ const ProductEditScreen = () => {
                 onChange={(e) => setDescription(e.target.value)}
               ></Form.Control>
             </Form.Group>
+
+            <Form.Group controlId="image">
+              <Form.Label>Add Image</Form.Label>
+              <Form.Control
+                label="Choose File"
+                onChange={(e) => setFiles(e.target.files)}
+                type="file"
+                multiple
+              ></Form.Control>
+              {loadingUpload && <Loader />}
+            </Form.Group>
+            <div>Select images to delete</div>
+            <Row >
+              {product.images.map((image, i) => (
+                <Col key={image._id} xs={3}>
+                  <div>
+                    <input
+                      id={i}
+                      type="checkbox"
+                      value={image.filename}
+                      onChange={handleCheckboxChange}
+                    />
+                    <label htmlFor={i}>
+                      <Image src={image.url} className="img-thumbnail" />
+                    </label>
+                  </div>
+                </Col>
+              ))}
+            </Row>
 
             <Button
               type="submit"

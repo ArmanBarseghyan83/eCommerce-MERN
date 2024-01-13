@@ -1,5 +1,12 @@
 import asyncHandler from '../middleware/asyncHandler.js';
 import Product from '../models/productModel.js';
+import { v2 as cloudinary } from 'cloudinary';
+
+cloudinary.config({
+  cloud_name: process.env.CLAUDINARY_CLOUD_NAME,
+  api_key: process.env.CLAUDINARY_KEY,
+  api_secret: process.env.CLAUDINARY_SECRET,
+});
 
 // @desc    Fetch all products
 // @route   GET /api/products
@@ -19,7 +26,7 @@ const getProducts = asyncHandler(async (req, res) => {
 
   const count = await Product.countDocuments({ ...keyword });
   const products = await Product.find({ ...keyword })
-    .sort({ updatedAt: - 1 })
+    .sort({ updatedAt: -1 })
     .limit(pageSize)
     .skip(pageSize * (page - 1));
 
@@ -32,7 +39,7 @@ const getProducts = asyncHandler(async (req, res) => {
 const getProductById = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {
-    product.reviews = product.reviews.reverse()
+    product.reviews = product.reviews.reverse();
     return res.json(product);
   } else {
     // this will run if a valid ObjectId but no product was found
@@ -70,10 +77,34 @@ const createProduct = asyncHandler(async (req, res) => {
 // @route   PUT /api/products/:id
 // @access  Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
-  const { name, price, description, images, brand, category, countInStock } =
-    req.body;
+  const {
+    name,
+    price,
+    description,
+    images,
+    deleteImages,
+    brand,
+    category,
+    countInStock,
+  } = req.body;
 
   const product = await Product.findById(req.params.id);
+
+  if (images) {
+    await product.updateOne({
+      $pull: { images: { filename: 'image_sample' } },
+    });
+  }
+
+  if (deleteImages.length) {
+    for (let filename of deleteImages) {
+      await cloudinary.uploader.destroy(filename);
+    }
+
+    await product.updateOne({
+      $pull: { images: { filename: { $in: deleteImages } } },
+    });
+  }
 
   if (product) {
     product.name = name;
@@ -100,6 +131,11 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
   if (product) {
     await Product.deleteOne({ _id: product._id });
+
+    product.images.forEach(async (image) => {
+      await cloudinary.uploader.destroy(image.filename);
+    });
+
     res.json({ message: 'Product removed' });
   } else {
     res.status(404);
