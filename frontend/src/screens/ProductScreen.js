@@ -11,6 +11,7 @@ import {
   Card,
   Button,
   Form,
+  Carousel,
 } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import Rating from '../components/Rating';
@@ -94,7 +95,13 @@ function ProductScreen() {
           <Meta title={product.name} />
           <Row>
             <Col md={6}>
-              <Image src={product.images[0].url} alt={product.name} fluid />
+              <Carousel pause="hover">
+                {product.images.map((image) => (
+                  <Carousel.Item key={image._id} >
+                    <Image src={image.url} alt={product.name} fluid />
+                  </Carousel.Item>
+                ))}
+              </Carousel>
             </Col>
             <Col md={6}>
               <Card>
