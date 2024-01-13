@@ -17,12 +17,11 @@ const ProductEditScreen = () => {
 
   const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
-  const [image, setImage] = useState('');
   const [brand, setBrand] = useState('');
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState('');
-  const [file, setFile] = useState(null);
+  const [files, setFiles] = useState(null);
 
   const {
     data: product,
@@ -42,19 +41,23 @@ const ProductEditScreen = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    let uploadResult = ''
+    let uploadResult = '';
 
     try {
-      if (file) {
+      if (files) {
         const formData = new FormData();
-        formData.append('image', file);
+
+        for (let i = 0; i < files.length; i++) {
+          formData.append('image', files[i]);
+        }
+
         uploadResult = await uploadProductImage(formData).unwrap();
       }
       await updateProduct({
         productId,
         name,
         price,
-        image: uploadResult?.image || image, 
+        images: uploadResult?.images || '',
         brand,
         category,
         description,
@@ -74,7 +77,6 @@ const ProductEditScreen = () => {
     if (product) {
       setName(product.name);
       setPrice(product.price);
-      setImage(product.image);
       setBrand(product.brand);
       setCategory(product.category);
       setCountInStock(product.countInStock);
@@ -119,15 +121,10 @@ const ProductEditScreen = () => {
             <Form.Group controlId="image">
               <Form.Label>Image</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="Enter image url"
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
-              ></Form.Control>
-              <Form.Control
                 label="Choose File"
-                onChange={(e) => setFile(e.target.files[0])}
+                onChange={(e) => setFiles(e.target.files)}
                 type="file"
+                multiple
               ></Form.Control>
               {loadingUpload && <Loader />}
             </Form.Group>
