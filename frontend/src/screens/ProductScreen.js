@@ -97,8 +97,13 @@ function ProductScreen() {
             <Col md={6}>
               <Carousel pause="hover">
                 {product.images.map((image) => (
-                  <Carousel.Item key={image._id} >
-                    <Image src={image.url} alt={product.name} fluid />
+                  <Carousel.Item key={image._id}>
+                    <Image
+                      src={image.url}
+                      alt={product.name}
+                      fluid
+                      style={{ maxHeight: '32rem' }}
+                    />
                   </Carousel.Item>
                 ))}
               </Carousel>

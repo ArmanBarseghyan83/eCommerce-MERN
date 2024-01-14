@@ -26,9 +26,8 @@ const getProducts = asyncHandler(async (req, res) => {
 
   const count = await Product.countDocuments({ ...keyword });
   const products = await Product.find({ ...keyword })
-    .sort({ updatedAt: -1 })
     .limit(pageSize)
-    .skip(pageSize * (page - 1));
+    .skip(pageSize * (page - 1));  
 
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
@@ -97,7 +96,6 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 
   if (deleteImages.length) {
-
     if (deleteImages.length === product.images.length) {
       await product.updateOne({
         $set: {
@@ -105,7 +103,7 @@ const updateProduct = asyncHandler(async (req, res) => {
         },
       });
     }
-    
+
     for (let filename of deleteImages) {
       await cloudinary.uploader.destroy(filename);
     }
@@ -113,8 +111,6 @@ const updateProduct = asyncHandler(async (req, res) => {
     await product.updateOne({
       $pull: { images: { filename: { $in: deleteImages } } },
     });
-
-    
   }
 
   if (product) {
