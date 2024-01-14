@@ -26,8 +26,9 @@ const getProducts = asyncHandler(async (req, res) => {
 
   const count = await Product.countDocuments({ ...keyword });
   const products = await Product.find({ ...keyword })
+    .sort({ updatedAt: -1, _id: 1 })
     .limit(pageSize)
-    .skip(pageSize * (page - 1));  
+    .skip(pageSize * (page - 1));
 
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
@@ -89,13 +90,16 @@ const updateProduct = asyncHandler(async (req, res) => {
 
   const product = await Product.findById(req.params.id);
 
+  // If new images are added, delete the sample image
   if (images) {
     await product.updateOne({
       $pull: { images: { filename: 'image_sample' } },
     });
   }
 
+
   if (deleteImages.length) {
+    // If all images were deleted, add sample image
     if (deleteImages.length === product.images.length) {
       await product.updateOne({
         $set: {
@@ -104,10 +108,12 @@ const updateProduct = asyncHandler(async (req, res) => {
       });
     }
 
+    // Delete images from cloudinary
     for (let filename of deleteImages) {
       await cloudinary.uploader.destroy(filename);
     }
 
+    // Delete images from db
     await product.updateOne({
       $pull: { images: { filename: { $in: deleteImages } } },
     });
@@ -139,6 +145,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
   if (product) {
     await Product.deleteOne({ _id: product._id });
 
+    // Delete corresponding images from cloudinary
     product.images.forEach(async (image) => {
       await cloudinary.uploader.destroy(image.filename);
     });

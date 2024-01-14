@@ -59,12 +59,16 @@ const ProductEditScreen = () => {
           formData.append('image', files[i]);
         }
 
+        // Send images to backend to upload to cloudinary
         uploadResult = await uploadProductImage(formData).unwrap();
       }
+
+      // Send data to the backend to update the product
       await updateProduct({
         productId,
         name,
         price,
+        // Uploaded images from cloudinary
         images: uploadResult?.images || '',
         deleteImages,
         brand,
