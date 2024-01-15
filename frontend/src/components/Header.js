@@ -10,6 +10,9 @@ import { logout } from '../slices/authSlice';
 import { resetCart } from '../slices/cartSlice';
 import SearchBox from './SearchBox';
 import logo from '../assets/logo2.png';
+import { useLoginMutation } from '../slices/usersApiSlice';
+import { setCredentials } from '../slices/authSlice';
+import { toast } from "react-toastify";
 
 function Header() {
   const { cartItems } = useSelector((state) => state.cart);
@@ -37,10 +40,32 @@ function Header() {
     setSearchBox((prevState) => !prevState);
   };
 
+  const [login] = useLoginMutation();
+  const guestAdminHandler = async () => {
+    try {
+      const res = await login({
+        email: 'arman@gmail.com',
+        password: '123456',
+      }).unwrap();
+      dispatch(setCredentials({ ...res }));
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
+
   return (
     <header className="nav-header">
+      {!userInfo && (
+        <div className="text-info text-center h3">
+          Use{' '}
+          <span onClick={guestAdminHandler} className="guest-admin">
+            Guest Admin
+          </span>{' '}
+          account to browse all the features
+        </div>
+      )}
       <Navbar variant="dark" expand="md" collapseOnSelect>
-        <Container >
+        <Container>
           <LinkContainer to="/" onClick={setSearchBox.bind(null, false)}>
             <Navbar.Brand>
               <img src={logo} alt="eCommerce" style={{ width: '3.5rem' }} />
@@ -57,7 +82,7 @@ function Header() {
                   <FaSearch />
                 </Nav.Link>
               )}
-              
+
               {userInfo ? (
                 <NavDropdown
                   title={<FaUser />}
@@ -76,9 +101,7 @@ function Header() {
                   to="/login"
                   onClick={setSearchBox.bind(null, false)}
                 >
-                  <Nav.Link>
-                    Login
-                  </Nav.Link>
+                  <Nav.Link>Login</Nav.Link>
                 </LinkContainer>
               )}
               {/* Admin Links */}

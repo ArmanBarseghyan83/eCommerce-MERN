@@ -104,6 +104,15 @@ a:hover {
   font-size: 1.3rem;
 }
 
+.guest-admin {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.guest-admin:hover {
+  color: rgb(7, 79, 161)
+}
+
 .brand-text {
   font-size: 1.3rem;
 }
