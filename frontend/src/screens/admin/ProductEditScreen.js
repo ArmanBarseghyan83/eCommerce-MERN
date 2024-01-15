@@ -178,7 +178,7 @@ const ProductEditScreen = () => {
             </Form.Group>
 
             <Form.Group controlId="image">
-              <Form.Label>Add Image</Form.Label>
+              <Form.Label>Add Images (recommended size 5 : 4)</Form.Label>
               <Form.Control
                 className="mb-2"
                 label="Choose File"
@@ -202,7 +202,7 @@ const ProductEditScreen = () => {
                           onChange={handleCheckboxChange}
                           className="position-absolute"
                         />
-                        <label htmlFor={i}>
+                        <label style={{cursor: 'pointer'}} htmlFor={i}>
                           <Image src={image.url} className="img-thumbnail" />
                         </label>
                       </div>

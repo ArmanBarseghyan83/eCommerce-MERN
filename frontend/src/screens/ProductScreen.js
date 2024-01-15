@@ -120,7 +120,6 @@ function ProductScreen() {
                       text={`${product.numReviews} reviews`}
                     />
                   </ListGroup.Item>
-                  <ListGroup.Item>Price: {product.price}</ListGroup.Item>
                   <ListGroup.Item>
                     Descriprion: {product.description}
                   </ListGroup.Item>
